@@ -20,7 +20,7 @@ Note that this tool uses your cookie to scan the map around your village. Howeve
 python <containing-folder-path>/calculator.py
 ```
 3. When prompted about JWT, log into Travian and retrieve your JWT from your browser cookies.
-  * On Chrome, this value is `Menu > More tools > Developer tools > Application > Storage > Cookies > JWT`
+   * On Chrome, this value is `Menu > More tools > Developer tools > Application > Storage > Cookies > JWT`
 
 This should give you something like the following:
 
@@ -43,6 +43,6 @@ You can also edit the `calculator.py` and pre-populate some fields to save some 
 
 ## :mortar_board: Theory
 
-When we fix the number of hours of the return of investment (ROI), we can calculate the maximum distance a single troop may travel to recuperate its production cost. Given that each farm has finite production and thus we can only send a finite number of troops to it each other, we can calculate the maximum number of troops to build before any new troop will be not worth it.
+When we fix the number of hours of the return of investment (ROI), we can calculate the maximum distance a single troop may travel to recuperate its production cost. Given that each farm has finite production and thus we can only send a finite number of troops to it, we can calculate the maximum number of troops to build before any new troop will be not worth it.
 
-This assumes that all troops are built instantly and all oases are clear of wild animals. This is often not the case. To account for this, you should lower your `efficiency` parameter when running the script.
+This assumes that all troops are built instantly and all oases are clear of wild animals. This is often not the case. To account for this, you should lower your `efficiency` and/or ROI parameters when running the script.
