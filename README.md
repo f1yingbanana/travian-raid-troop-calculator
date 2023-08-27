@@ -43,6 +43,38 @@ You can also edit the `calculator.py` and pre-populate some fields to save some 
 
 ## :mortar_board: Theory
 
-When we fix the number of hours of the return of investment (ROI), we can calculate the maximum distance a single troop may travel to recuperate its production cost. Given that each farm has finite production and thus we can only send a finite number of troops to it, we can calculate the maximum number of troops to build before any new troop will be not worth it.
+In an ideal scenario, we are the only farmer and all farms never overflow. A farm is characterized by its production rate $P_f$ and distance $D_f$ from the farmer. A troop is characterized by its speed $S_t$, production cost $C_t$, carrying capacity $W_t$, and upkeep $K_t$.
 
-This assumes that all troops are built instantly and all oases are clear of wild animals. This is often not the case. To account for this, you should lower your `efficiency` and/or ROI parameters when running the script.
+It follows that to be able to empty the resources of a farm $f$, we need the following amount of troops per hour:
+
+$$R_f = \frac{P_f}{W_t}$$
+
+A troop is occupied when it is out farming. It spends $2D_f/S_t$ hours on the way. Therefore we need the following amount of troops to exhaust a farm non-stop:
+
+$$N_f = \frac{2R_fD_f}{S_t} = \frac{2P_fD_f}{S_tW_t}$$
+
+This costs $N_fC_t$ to build, and $N_fK_t$ for the crop cost per hour, which we can reduce from $P_f$. Thus the return of investment (ROI) is:
+
+$$T_{\text{ROI}} = \frac{N_fC_t}{P_f-N_fK_t} = \frac{2D_fC_t}{S_tW_t - 2D_fK_t}$$
+
+Note that $T_{\text{ROI}}$ only depends on the farm's distance, and does not depend on its production.
+
+Given a target ROI $T_{\text{Target}}$, we can thus find the maximum distance for a particular type of troop:
+
+$$D_{\text{ROI}} = \frac{T_{\text{Target}}S_tW_t}{2C_t+2T_{\text{Target}}K_t}$$
+
+To find the number of troops to build, we can sum $N_f$ for each farm within $D_{\text{ROI}}$ of the farmer:
+
+$$N = \sum_{f | D_f < D_{\text{ROI}}} N_f$$
+
+The calculation above assumes perfect farm. To account for farming competition from other players, we introduce an efficiency factor $e, 0 < e \le 1$, which represents how much farm we are getting from the sources:
+
+$$T_{\text{ROI}} = \frac{N_fC_t}{eP_f - N_fK_t} = \frac{2D_fC_t}{eS_tW_t - 2D_fK_t}$$
+
+Similarly, $D_{\text{ROI}}$ is now:
+
+$$D_{\text{ROI}} = \frac{eT_{\text{Target}}S_tW_t}{2C_t+2T_{\text{Target}}K_t}$$
+
+As expected, this increases $T_{\text{ROI}}$, which reduces $D_{\text{ROI}}$ and $N$.
+
+The calculation above still assumes that all troops are built instantly and all oases are clear of wild animals. We can again account for this by tuning $e$ when running the script.

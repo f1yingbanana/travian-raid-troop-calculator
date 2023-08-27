@@ -20,8 +20,7 @@ def calculate_roi_distance(unit, target_roi, efficiency):
   make that ROI from how fast is the unit and how many trips it must make to
   gather its production cost.
   """
-  trips = unit.cost / unit.carrying_capacity
-  return unit.speed * efficiency * target_roi / (trips * 2)
+  return efficiency * target_roi * unit.speed * unit.carrying_capacity / (2 * unit.cost + 2 * target_roi * unit.upkeep)
 
 
 def calculate_units(farm_map, unit, target_roi, efficiency, include_research):
@@ -36,8 +35,9 @@ def calculate_units(farm_map, unit, target_roi, efficiency, include_research):
   roi_distance = calculate_roi_distance(unit, target_roi, efficiency)
 
   for farm in farm_map.farms:
-    if math.dist(farm.location, farm_map.self_location) <= roi_distance:
-      capacity = farm.production / unit.carrying_capacity
+    farm_distance = math.dist(farm.location, farm_map.self_location)
+    if farm_distance <= roi_distance:
+      capacity = 2 * farm.production * farm_distance / (unit.speed * unit.carrying_capacity)
       units_to_build += capacity
       farm_rate += farm.production * efficiency
 

@@ -36,21 +36,22 @@ class Oasis(Farm):
 
 
 class Troop:
-  def __init__(self, speed, carrying_capacity, cost, research_cost):
+  def __init__(self, speed, carrying_capacity, cost, upkeep, research_cost):
     """
     Initializes a troop.
     """
     self.speed = speed
     self.carrying_capacity = carrying_capacity
     self.cost = cost
+    self.upkeep = upkeep
     self.research_cost = research_cost
 
 
-Troop.LEGIONNAIRE = Troop(6, 50, 400, 0)
-Troop.EQUITES_IMPERATORIS = Troop(14, 100, 1410, 8780)
-Troop.CLUBSWINGER = Troop(7, 60, 250, 0)
-Troop.PHALANX = Troop(7, 35, 315, 0)
-Troop.THEUTATES_THUNDER = Troop(19, 75, 1090, 6660)
+Troop.LEGIONNAIRE = Troop(6, 50, 400, 1, 0)
+Troop.EQUITES_IMPERATORIS = Troop(14, 100, 1410, 3, 8780)
+Troop.CLUBSWINGER = Troop(7, 60, 250, 1, 0)
+Troop.PHALANX = Troop(7, 35, 315, 1, 0)
+Troop.THEUTATES_THUNDER = Troop(19, 75, 1090, 2, 6660)
 
 
 class Map:
