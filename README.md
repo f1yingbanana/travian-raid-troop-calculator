@@ -2,7 +2,7 @@
 
 Travian Raid Troop Calculator is a Python tool used to calculate how many troops you should build given the farms around you. It is designed to calculate an optimal number of troops to build to rush for a second village within the beginner's protection period.
 
-Note that this tool uses your cookie to scan the map around your village. However, this tool does not automate any actions on the account or resemble any premium features, and thus should be exempt from §3 of [game rules](https://www.travian.com/us/gamerules). However, I still strongly recommend you to review the code to ensure that the cookie is not being used in a non-malicious way and make your own decision whether to utilize this tool or not.
+Note that this tool uses your cookie to scan the map around your village. However, this tool does not automate any actions on the account or resemble any premium features, and thus should be exempt from §3 of [game rules](https://www.travian.com/us/gamerules). However, I still strongly recommend you to review the code to ensure that the cookie is not being used in a malicious way and make your own decision whether to utilize this tool or not.
 
 ## :hammer_and_wrench: Prerequisites
 
@@ -55,7 +55,7 @@ $$N_f = \frac{2R_fD_f}{S_t} = \frac{2P_fD_f}{S_tW_t}$$
 
 This costs $N_fC_t$ to build, and $N_fK_t$ for the crop cost per hour, which we can reduce from $P_f$. Thus the return of investment (ROI) is:
 
-$$T_{\text{ROI}} = \frac{N_fC_t}{P_f-N_fK_t} = \frac{2D_fC_t}{S_tW_t - 2D_fK_t}$$
+$$T_{\text{ROI}} = \frac{N_fC_t}{P_f-N_fK_t} = \frac{\frac{2P_fD_f}{S_tW_t}C_t}{P_f-\frac{2P_fD_f}{S_tW_t}K_t} = \frac{2D_fC_t}{S_tW_t - 2D_fK_t}$$
 
 Note that $T_{\text{ROI}}$ only depends on the farm's distance, and does not depend on its production.
 
